@@ -2,9 +2,13 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 import counter from './modules/counter'
 
-import * as actions from './actions' // ovim * as actions, js ce da kreira objekat kojim cemo imati pristup imenima/f-jama u actions. I posto je sad ovo actions objekat, mozemo ga upisati dole kao actions samo, a ono actions {} obrisati. Isto mozemo i za mutations
-import * as getters from './getters'
-import * as mutations	 from './mutations'
+// import * as actions from './actions' // ovim * as actions, js ce da kreira objekat kojim cemo imati pristup imenima/f-jama u actions. I posto je sad ovo actions objekat, mozemo ga upisati dole kao actions samo, a ono actions {} obrisati. Isto mozemo i za mutations
+// import * as getters from './getters'
+// import * as mutations	 from './mutations'
+// korigovali smo sada ovo u fajlovima nisu ponaosob konstante vec objekat, tamo exportujem oobj, dakle ovde ne mroamo * as vec samo kako zelimo da importujemo
+import actions from './actions'
+import getters from './getters'
+import mutations from './mutations'
 
 Vue.use(Vuex)
 

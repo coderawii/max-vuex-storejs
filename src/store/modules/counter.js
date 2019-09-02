@@ -26,36 +26,64 @@ const getters = {
 }
 
 const mutations = {
-	inkrement: (state, pejloud) => { // ovaj payload je argument iz actions, da mozemo ovo da inkrementujemo by pejloud
-		// setTimeout() // NE SME< NECE RADITI!
-		// state.brojac++
-		state.brojac += pejloud
-	},
+	// inkrement: (state, pejloud) => { // ovaj payload je argument iz actions, da mozemo ovo da inkrementujemo by pejloud
+	// 	// setTimeout() // NE SME< NECE RADITI!
+	// 	// state.brojac++
+	// 	state.brojac += pejloud
+	// },
 
-	dekrement: (state, pejloud) => {
-		// state.brojac--
-		state.brojac -= pejloud
-	}
+	// dekrement: (state, pejloud) => {
+	// 	// state.brojac--
+	// 	state.brojac -= pejloud
+	// }
+	[types.MUTATE_INCREMENT_COUNTER]: (state, pejloud) => {
+        state.brojac += pejloud;
+    },
+
+	[types.MUTATE_DECREMENT_COUNTER]: (state, pejloud) => {
+        state.brojac -= pejloud;
+    },
 }
 
 const actions = {
-	inkrement: ({ commit }, payload) => { // ovde nemamo nista asinhrono ali nije losa praksa ...pojma nemam sta. Inace, ova f-ja moze da ima argumente, recimo payload, ime moze bilo koje, ali kazemo payload jer ima neki korisni teret, nosi nesto sa sobom wtf
-		commit('inkrement', payload) // takodje taj payload prosledjujemo u mutations dakle onda ide i u ovaj commit
+	// inkrement: ({ commit }, payload) => { // ovde nemamo nista asinhrono ali nije losa praksa ...pojma nemam sta. Inace, ova f-ja moze da ima argumente, recimo payload, ime moze bilo koje, ali kazemo payload jer ima neki korisni teret, nosi nesto sa sobom wtf
+	// 	commit('inkrement', payload) // takodje taj payload prosledjujemo u mutations dakle onda ide i u ovaj commit
+	// },
+
+	// dekrement: ({ commit }, payload) => {
+	// 	commit('dekrement', payload)
+	// },
+
+	// asyncInkrement: ({ commit }, payload) => {
+	// 	setTimeout(() => {
+	// 		commit('inkrement', payload.by)
+	// 	}, payload.duration)
+	// },
+
+	// asyncDekrement: ({ commit }, payload) => {
+	// 	setTimeout(() => {
+	// 		commit('dekrement', payload.by)
+	// 	}, payload.duration)
+	// }
+
+
+	[types.COUNTER_INCREMENT]: ({ commit }, payload) => {
+		commit(types.MUTATE_INCREMENT_COUNTER, payload)
 	},
 
-	dekrement: ({ commit }, payload) => {
-		commit('dekrement', payload)
+	[types.COUNTER_DECREMENT]: ({ commit }, payload) => {
+		commit(types.MUTATE_DECREMENT_COUNTER, payload)
 	},
 
-	asyncInkrement: ({ commit }, payload) => {
+	[types.COUNTER_INCREMENT_ASYNC]: ({ commit }, payload) => {
 		setTimeout(() => {
-			commit('inkrement', payload.by)
+			commit(types.MUTATE_INCREMENT_COUNTER, payload.by)
 		}, payload.duration)
 	},
 
-	asyncDekrement: ({ commit }, payload) => {
+	[types.COUNTER_DECREMENT_ASYNC]: ({ commit }, payload) => {
 		setTimeout(() => {
-			commit('dekrement', payload.by)
+			commit(types.MUTATE_DECREMENT_COUNTER, payload.by)
 		}, payload.duration)
 	}
 }
@@ -63,9 +91,9 @@ const actions = {
 
 export default {
 	state: state, // iliti state
-	getters: getters,
 	mutations,
-	actions
+	actions,
+	getters
 }
 
 // naravno ovo je ovako samo da bi nama bilo lakse snaci se, gde je sta, itd, ali sustina vuex je da sve bude centralizovano, a ovo je samo privremeno samo nama da se olaksa. I onda idemo u store.js i dodajemo novi properti modules da pozovemo ove particije rasparcane

@@ -28,6 +28,8 @@ import Counter from './components/Counter.vue'
 import Result from './components/Result.vue'
 import AnotherResult from './components/AnotherResult.vue'
 import AnotherCounter from './components/AnotherCounter.vue'
+import * as types from './store/types';
+
 
 export default {
 	name: 'app',
@@ -52,18 +54,21 @@ export default {
 		//? sa get i set
 		val: {
 			get(){
-				return this.$store.getters.valueState
+				// return this.$store.getters.valueState
+				return this.$store.getters[types.VALUE]
 			},
 
 			set(value) {
-				this.$store.dispatch('apdejtValue', value)
+				// this.$store.dispatch('apdejtValue', value)
+				this.$store.dispatch(types.UPDATE_VALUE, value)
 			}
 		}
 	},
 
 	methods: {
 		updateVal(event) {
-			this.$store.dispatch('apdejtValue', event.target.value)
+			// this.$store.dispatch('apdejtValue', event.target.value)
+			this.$store.dispatch(types.UPDATE_VALUE, event.target.value)
 		}
 	}
 }

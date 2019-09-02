@@ -12,6 +12,7 @@
 <script>
 // import { mapMutations } from 'vuex'
 import { mapActions } from 'vuex'
+import * as types from '../store/types'
 
 export default {
 	//? bez mapMutations
@@ -35,12 +36,17 @@ export default {
 
 	//? sa mapActions, za asinhrone radnje obavezno, ali moze i za sinhrone
 	methods: {
-		...mapActions([
-			'inkrement',
-			'dekrement',
-			'asyncInkrement',
-			'asyncDekrement'
-		])
+		// ...mapActions([
+		// 	'inkrement',
+		// 	'dekrement',
+		// 	'asyncInkrement',
+		// 	'asyncDekrement'
+		// ])
+
+		...mapActions({
+			asyncInkrement: types.COUNTER_INCREMENT_ASYNC,
+			asyncDekrement: types.COUNTER_DECREMENT_ASYNC
+		})
 
 		// inkrement(by) {
 		// 	this.$store.dispatch('inkrement', by) // ovo je sve sto ustvari ova mapActions f-ja
