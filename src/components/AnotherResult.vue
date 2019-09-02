@@ -14,6 +14,7 @@
 
 <script>
 import { mapGetters } from 'vuex'
+import * as types from '../store/types'
 
 export default {
 
@@ -31,24 +32,30 @@ export default {
 	// 	//	tim metodom kreiramo sve computed propertije koji nam trebaju, njega moramo da importujemo iz vuex-a i zove se mapGetters
 	// }
 	//? sa mapGetters
-	computed: 
-		{...mapGetters([ // i u ovom arrayu samo specifikujemo sve getterse iz store.js koje zelimo da koristimo
-				'doubleBrojac',
-				'stringBrojac'
+	computed:
+	{
+		// ...mapGetters([ // i u ovom arrayu samo specifikujemo sve getterse iz store.js koje zelimo da koristimo
+		// 		'doubleBrojac',
+		// 		'stringBrojac'
 
-				// ili stavimo objekat i key: value pair
-				// {
-				// 	counter: 'doubleBrojac',
-				// 	clicks: 'stringBrojac'
-				// }
+		// 		// ili stavimo objekat i key: value pair
+		// 		// {
+		// 		// 	counter: 'doubleBrojac',
+		// 		// 	clicks: 'stringBrojac'
+		// 		// }
 				
-			]), //! u pozadini ovo automatski kreira cmputed propertije koje je imenovao u doubleCounter i stringCounter i mapirao ih sa getters u store.js. I zato ih gore u template mzoemo pozivati sa doubleBrojac i stringBrojac.
+		// 	]), //! u pozadini ovo automatski kreira cmputed propertije koje je imenovao u doubleCounter i stringCounter i mapirao ih sa getters u store.js. I zato ih gore u template mzoemo pozivati sa doubleBrojac i stringBrojac.
 
-			// ourOwnComputerProperty() {
+		// 	// ourOwnComputerProperty() {
 				
-			// }
-		} // medjutim, kako ako sad recimo zelim da napravim svoje neke leve computed propertije, nevezano sad za store.js, nemam gde da ih stavim, jer smo za computed stavili jednu f-ju mapGetters? E pa u es6 ima odlicna fora za ovo a to je spread operator (one tri tacke, ...) koje prave novi objekat u kom ce biti taj mapGetters i svi ostali koje dodamo posle, s tim sto moramo da stavimo mapGetters (i te koje budemo dodavali) u {}
-	
-	
+		// 	// }
+		// } // medjutim, kako ako sad recimo zelim da napravim svoje neke leve computed propertije, nevezano sad za store.js, nemam gde da ih stavim, jer smo za computed stavili jednu f-ju mapGetters? E pa u es6 ima odlicna fora za ovo a to je spread operator (one tri tacke, ...) koje prave novi objekat u kom ce biti taj mapGetters i svi ostali koje dodamo posle, s tim sto moramo da stavimo mapGetters (i te koje budemo dodavali) u {}
+
+		//* elem, sada ono gore vise ne mozemo koristi jer doubleBrojac i stringBrojac sa tim nazivima ne postoje, vec smo preko types napravili druge konstante. I sada u mapGetters() vise ne stavljamo ARRAY nego OBJEKAT. Stavicemo key-value, da key bude isti naziv kao prethodni tj doubleBrojac i stringBrojac, cisto zbog templejta jer smo tamo pozivali takva imena. I sada
+		...mapGetters({
+			doubleBrojac: types.DOUBLE_COUNTER,
+			stringBrojac: types.CLICK_COUNTER
+		})
+	}
 }
 </script>
